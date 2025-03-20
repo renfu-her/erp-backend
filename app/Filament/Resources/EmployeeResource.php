@@ -77,6 +77,8 @@ class EmployeeResource extends Resource
                         'inactive' => '離職',
                         'on_leave' => '請假中',
                     ])
+                    ->native(false)
+                    ->default('active')
                     ->label('狀態'),
                 Forms\Components\Textarea::make('notes')
                     ->label('備註'),
@@ -118,18 +120,23 @@ class EmployeeResource extends Resource
                         'inactive' => 'danger',
                         'on_leave' => 'warning',
                     })
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'active' => '在職',
+                        'inactive' => '離職',
+                        'on_leave' => '請假中',
+                    })
                     ->label('狀態'),
                 Tables\Columns\TextColumn::make('hire_date')
-                    ->date()
+                    ->date('Y-m-d')
                     ->sortable()
                     ->label('到職日期'),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('Y-m-d H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->label('建立時間'),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime('Y-m-d H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->label('更新時間'),
