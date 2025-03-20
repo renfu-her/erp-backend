@@ -14,6 +14,8 @@ class Employee extends Model
     protected $fillable = [
         'employee_id',
         'name',
+        'id_number',
+        'password',
         'email',
         'phone',
         'address',
@@ -24,6 +26,11 @@ class Employee extends Model
         'salary',
         'status',
         'notes',
+        'disability_level',
+        'disability_card_number',
+        'disability_card_expiry',
+        'health_insurance_grade',
+        'health_insurance_amount',
     ];
 
     protected $casts = [
