@@ -24,6 +24,12 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'edit employees']);
         Permission::create(['name' => 'delete employees']);
 
+        // 部門管理權限
+        Permission::create(['name' => 'view departments']);
+        Permission::create(['name' => 'create departments']);
+        Permission::create(['name' => 'edit departments']);
+        Permission::create(['name' => 'delete departments']);
+
         // 出勤管理權限
         Permission::create(['name' => 'view attendances']);
         Permission::create(['name' => 'create attendances']);
@@ -54,6 +60,7 @@ class RoleAndPermissionSeeder extends Seeder
 
         $hr->givePermissionTo([
             'view employees', 'create employees', 'edit employees',
+            'view departments', 'create departments', 'edit departments',
             'view attendances', 'create attendances', 'edit attendances',
             'view leaves', 'create leaves', 'edit leaves', 'approve leaves',
             'view payrolls', 'create payrolls', 'edit payrolls',
@@ -61,6 +68,7 @@ class RoleAndPermissionSeeder extends Seeder
 
         $manager->givePermissionTo([
             'view employees',
+            'view departments',
             'view attendances',
             'view leaves', 'approve leaves',
             'view payrolls',
@@ -68,6 +76,7 @@ class RoleAndPermissionSeeder extends Seeder
 
         $employee->givePermissionTo([
             'view employees',
+            'view departments',
             'view attendances',
             'view leaves', 'create leaves',
             'view payrolls',

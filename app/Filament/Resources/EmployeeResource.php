@@ -58,8 +58,11 @@ class EmployeeResource extends Resource
                 Forms\Components\TextInput::make('position')
                     ->required()
                     ->label('職位'),
-                Forms\Components\TextInput::make('department')
+                Forms\Components\Select::make('department_id')
+                    ->relationship('department', 'name')
                     ->required()
+                    ->searchable()
+                    ->preload()
                     ->label('部門'),
                 Forms\Components\TextInput::make('salary')
                     ->required()

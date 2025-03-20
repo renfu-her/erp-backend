@@ -20,7 +20,7 @@ class Employee extends Model
         'birth_date',
         'hire_date',
         'position',
-        'department',
+        'department_id',
         'salary',
         'status',
         'notes',
@@ -31,6 +31,11 @@ class Employee extends Model
         'hire_date' => 'date',
         'salary' => 'decimal:2',
     ];
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
 
     public function attendances()
     {
