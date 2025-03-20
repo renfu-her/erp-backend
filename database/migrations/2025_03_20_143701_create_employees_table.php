@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->date('birth_date')->nullable();
             $table->date('hire_date');
-            $table->string('position');
-            $table->string('department');
+            $table->foreignId('position_id')->constrained()->onDelete('restrict');
+            $table->foreignId('department_id')->constrained()->onDelete('restrict');
             $table->decimal('salary', 10, 2);
             $table->enum('status', ['active', 'inactive', 'on_leave']);
             $table->text('notes')->nullable();

@@ -55,9 +55,10 @@ class EmployeeResource extends Resource
                 Forms\Components\DatePicker::make('hire_date')
                     ->required()
                     ->label('到職日期'),
-                Forms\Components\TextInput::make('position')
-                    ->required()
-                    ->label('職位'),
+                Forms\Components\Select::make('position_id')
+                    ->label('職位')
+                    ->relationship('position', 'name')
+                    ->required(),
                 Forms\Components\Select::make('department_id')
                     ->relationship('department', 'name')
                     ->required()
@@ -98,11 +99,15 @@ class EmployeeResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->label('電子郵件'),
-                Tables\Columns\TextColumn::make('position')
+                Tables\Columns\TextColumn::make('phone')
+                    ->searchable()
+                    ->sortable()
+                    ->label('電話'),
+                Tables\Columns\TextColumn::make('position.name')
                     ->searchable()
                     ->sortable()
                     ->label('職位'),
-                Tables\Columns\TextColumn::make('department')
+                Tables\Columns\TextColumn::make('department.name')
                     ->searchable()
                     ->sortable()
                     ->label('部門'),
@@ -114,6 +119,10 @@ class EmployeeResource extends Resource
                         'on_leave' => 'warning',
                     })
                     ->label('狀態'),
+                Tables\Columns\TextColumn::make('hire_date')
+                    ->date()
+                    ->sortable()
+                    ->label('到職日期'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
