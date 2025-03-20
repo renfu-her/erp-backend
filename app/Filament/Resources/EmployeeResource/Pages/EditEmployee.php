@@ -5,6 +5,7 @@ namespace App\Filament\Resources\EmployeeResource\Pages;
 use App\Filament\Resources\EmployeeResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Notifications\Notification;
 
 class EditEmployee extends EditRecord
 {
@@ -13,7 +14,32 @@ class EditEmployee extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\DeleteAction::make()
+                ->modalHeading('刪除員工')
+                ->modalDescription('確定要刪除此員工嗎？此操作無法復原。')
+                ->modalSubmitActionLabel('確定刪除')
+                ->modalCancelActionLabel('取消'),
         ];
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+
+    protected function getSavedNotification(): ?Notification
+    {
+        return Notification::make()
+            ->success()
+            ->title('員工已更新')
+            ->body('員工資料已成功更新。');
+    }
+
+    protected function getDeletedNotification(): ?Notification
+    {
+        return Notification::make()
+            ->success()
+            ->title('員工已刪除')
+            ->body('員工資料已成功刪除。');
     }
 }
